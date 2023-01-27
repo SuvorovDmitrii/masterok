@@ -20,7 +20,7 @@ class Status(models.Model):
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     patronomyc = models.CharField(max_length=25, verbose_name="Отчество")
-    person_pic = models.ImageField(upload_to='static/images/users/', default='static/images/def.jpg')
+    person_pic = models.ImageField(upload_to='media/images/users/', default='static/images/def.jpg')
     def get_absolute_url(self):
         return reverse('firstapp:registration/user_page/', args=[self.user.id])
 

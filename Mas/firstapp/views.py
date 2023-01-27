@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm, UserPageForm
 from .models import *
 from django.views.generic.detail import DetailView
+from django.views.generic import UpdateView
+from django import forms
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -10,7 +12,7 @@ from django.urls import reverse_lazy
 def getpage(request):
     return render(request, "index.html")
 
-class ShowUserPageView(DetailView):
+class ShowUserPageView(DetailView, ):
     model = Person
     template_name = 'registration/user_page.html'
 
@@ -34,6 +36,11 @@ class ShowUserPageView(DetailView):
         return context
         '''
 
+class UserUpdatePage(UpdateView):
+    model = User, Person
+    template_name_suffix = '_update_form'
+    person_pic = forms.ImageField(label='Ваш аватар', widget=forms.ImageField)
+    fields = ('second_name', 'first_name', 'patronomyc', 'email')
 
 
 def login(request):

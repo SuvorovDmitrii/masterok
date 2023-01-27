@@ -10,7 +10,7 @@
       {% endif %}
 
     </div>
-
+<a href="{% url 'user_update_page' %}">Изменить данные</a>
  <form method="POST">
     {{user_page_form.form.as_p}}
     {% csrf_token %}
