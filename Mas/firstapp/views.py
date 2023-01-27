@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm, UserPageForm
 from .models import *
 from django.views.generic.detail import DetailView
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView
 from django import forms
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
@@ -12,21 +12,19 @@ from django.urls import reverse_lazy
 def getpage(request):
     return render(request, "index.html")
 
-class ShowUserPageView(DetailView, ):
+class ShowUserPageView(DetailView):
     model = Person
     template_name = 'registration/user_page.html'
 
     def get_object(self):
-        return get_object_or_404(User, id=self.request.user.id)
+        return get_object_or_404(Person, id=self.request.user.id)
 
     def user_page(self, request):
         users = User.objects.all()
         persons = User.objects.all()
-        page_form = UserPageForm
-        if request.method == 'POST':
-            cd = page_form.cleaned_data
-        return request('registration/user_page.html', context={'page_form': page_form, 'users':users, 'persons':persons})
-    '''
+        return render(request, 'registration/user_page.html', context={'users': users, 'persons': persons})
+
+        '''
     def get_context_data(self, *args, **kwargs):
         users = Person.objects.all()
         context = super(ShowUserPageView, self).get_context_data(*args, **kwargs)

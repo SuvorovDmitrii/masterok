@@ -8,6 +8,7 @@ class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
     soglasie = forms.BooleanField(label='Согласие на обработку персональных данных', widget=forms.BooleanField)
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')

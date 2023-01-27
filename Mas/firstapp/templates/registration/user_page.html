@@ -4,7 +4,7 @@
 
 <div class="card-body">
 
-      <p><strong>Username:</strong> {{ model. }}</p><br><br>
+      <p><strong>{{request.user.last_name}} {{request.user.first_name}} {{persons.patronomyc}}</strong></p><br><br>
       {% if user.id == profile.user.id %}
       <a href="{% url 'edit_user_profile' profile.id %}"><button class="button">Edit</button></a>
       {% endif %}
