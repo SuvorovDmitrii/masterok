@@ -6,9 +6,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-urlpatterns = [
+urlpatterns =	 [
 	path('', views.main, name="main"),
-	path('user_page/<int:pk>/', views.ShowUserPageView.as_view(), name="user_page"),
+	path('user_page/', views.ShowUserPageView.as_view(), name="user_page"),
 	path('registration/', views.register, name="registration"),
 	path('admin/', admin.site.urls, name='admin'),
 	#path('login/', views.login, name="login"),

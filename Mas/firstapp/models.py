@@ -17,7 +17,6 @@ class Status(models.Model):
     def __str__(self):
         return self.name
 
-
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     patronomyc = models.CharField(max_length=25, verbose_name="Отчество")
