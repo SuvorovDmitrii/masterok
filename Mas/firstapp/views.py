@@ -17,29 +17,37 @@ class ShowUserPageView(DetailView):
     template_name = 'registration/user_page.html'
 
     def get_object(self):
-        return get_object_or_404(Person, id=self.request.user.id)
+        # users = User.objects.filter(id__exact = self.request.user.id)
+        # patronomyc = users.get(Person.patronomyc)
+        try:
+            person = Person.objects.get(user=self.request.user.id)
+        except:
+            person = None
+        return person
 
-    def user_page(self, request):
-        users = User.objects.all()
-        persons = User.objects.all()
-        return render(request, 'registration/user_page.html', context={'users': users, 'persons': persons})
+        # if self.request.user.id in Person.user.id:
+        #     person = Person.objects.get(user = self.request.user.id)
+        #     return person#, render(request, 'registration/user_page.html',context={'patronomyc':patronomyc, 'img':img})
+        # else:
+        #     return get_object_or_404(User, self.request.user.id)
 
-        '''
+'''
     def get_context_data(self, *args, **kwargs):
         users = Person.objects.all()
         context = super(ShowUserPageView, self).get_context_data(*args, **kwargs)
-        page_user = get_object_or_404(Person, id=self.kwargs['pk'])
+        page_user = get_object_or_404(User, id=self.request.user.id)
         context['page_user'] = page_user
         context['users'] = users
-        return context
-        '''
+        return context, get_object_or_404(User, id=self.request.user.id)
+'''
+
 
 class UserUpdatePage(UpdateView):
-    model = User, Person
-    template_name_suffix = '_update_form'
-    person_pic = forms.ImageField(label='Ваш аватар', widget=forms.ImageField)
-    fields = ('second_name', 'first_name', 'patronomyc', 'email')
-
+    model = Person, User
+    template_name = 'user_update_form.html'
+    fields = ('patronomyc', )
+    def get_object(self):
+        return get_object_or_404(User, id = self.request.user.id)
 
 def login(request):
     return render(request, 'login.html')

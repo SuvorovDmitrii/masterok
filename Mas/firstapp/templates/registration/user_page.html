@@ -4,16 +4,10 @@
 
 <div class="card-body">
 
-      <p><strong>{{request.user.last_name}} {{request.user.first_name}} {{persons.patronomyc}}</strong></p><br><br>
-      {% if user.id == profile.user.id %}
-      <a href="{% url 'edit_user_profile' profile.id %}"><button class="button">Edit</button></a>
-      {% endif %}
-
-    </div>
+    <p><strong>{{request.user.last_name}} {{request.user.first_name}} {% if person.patronomyc %}{{person.patronomyc}}{% endif %}</strong></p>
+    {% if person.person_pic %}
+    <img width="50" src="{{person.person_pic.url}}" alt="">
+    {% endif %}
+</div>
 <a href="{% url 'user_update_page' %}">Изменить данные</a>
- <form method="POST">
-    {{user_page_form.form.as_p}}
-    {% csrf_token %}
-        <input type="submit" value="Сохранить">
-    </form>
 {% endblock %}

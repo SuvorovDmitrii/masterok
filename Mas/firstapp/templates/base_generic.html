@@ -64,9 +64,8 @@
 
 <div class="main">
     {% block content %}
+       <div class="counter">
     {% for orderss in orders %}
-    <div class="counter">
-
         <div class="counter_box">
             <div class="box_content">
                 <div class="box">
@@ -86,13 +85,14 @@
                     <img width="400px" src="{{orderss.posle_remont.url}}" alt="">
                     <p>Помещение после ремонта</p>
                 </div>
-                
+
                 <!--  Вот тут поле с фото -->
             </div>
         </div>
 
-    </div>
+
     {% endfor %}
+           </div>
     <div class="schet">
         <div class="schet_box">
             <p>Всего отремонтированно: {{count}}</p>
